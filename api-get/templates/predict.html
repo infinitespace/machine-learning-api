@@ -1,0 +1,31 @@
+{% extends "app_base.html" %}
+{% block content %}
+	<h3> Prediction </h3>
+	<form method="POST" action="predict" role="form" style="width:100%">
+		{% if message is defined %}
+			<div class="alert alert-warning" role="alert">{{ message }}</div>
+		{% endif %}
+		<div class="alert alert-info" style="width:100%">
+			Input 'X1,...,X14' separated by a single space.
+			</br>
+			<span>For instance, input: -0.6339,-1.82565,-0.176931,1.941343,1.694153,1.998986,-1.124004,-1.139834,0.227833,1.079071,0.136403,0.359476,0.381488,-0.299467</span>
+		</div>
+		<div class="form-group">
+			<label for="X_input">X1,X2,X3, ... ,X14</label>
+			<input type="text" class="form-control" id="X_input" name="X_input" />
+		</div>
+		<div><input type="submit" value="Start Predicting!" class="btn btn-primary" /></div>
+	</form></br></br>
+	<h3>Prediction Result</h3>
+	<div class="alert alert-info" style="max-width:800px; width:100%">
+		{% if err_flag %}
+			<div>
+				<span>{{err_message}}</span>
+			</div>
+		{% else %}
+			<span>Input X =  {{parsed_x}}</span></br></br>
+			<span>Prediction result y = {{predict_result}}</span></br>
+		{% endif %}
+		{{debug}}
+	</div>
+{% endblock %}
